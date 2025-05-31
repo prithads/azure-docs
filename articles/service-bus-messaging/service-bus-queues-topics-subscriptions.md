@@ -92,6 +92,16 @@ In many scenarios, messages that have specific characteristics must be processed
 
 For a full working example, see the [TopicFilters sample](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/servicebus/Azure.Messaging.ServiceBus/samples/TopicFilters) on GitHub. For more information about filters, see [Topic filters and actions](topic-filters.md).
 
+### Metadata Memory Usage
+
+Topics and subscriptions consume a small amount of memory even when no messages are present. This memory usage comes from metadata stored for each subscription. Metadata includes configuration settings such as lock duration, time-to-live (TTL), and session state. If sessions are enabled, session metadata is maintained even when no sessions are active.
+
+Each subscription contributes to the topic’s overall metadata footprint, whether or not they contain any messages. This behavior is expected and reflects the internal storage required for routing logic, indexing, and configuration metadata.
+
+When designing solutions with many subscriptions or session-enabled workflows, consider this metadata overhead as part of your resource planning.
+
+
+
 ## Java message service (JMS) 2.0 entities
 
 The following entities are accessible through the Java message service (JMS) 2.0 API.
